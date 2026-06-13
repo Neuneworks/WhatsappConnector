@@ -56,10 +56,12 @@ app.post("/order", async (req, res) => {
 
     // ── STEP 4: REPLY ON WHATSAPP ───────────────────────────────────────────
     if (invoiceData.error) {
+      console.log("Claude parsing failed or message not an order:", invoiceData.reply);
       // Claude couldn't parse a valid order — ask for clarification
       await sendWhatsAppMessage(from, invoiceData.reply, to);
     } else {
       // Valid order parsed — confirm and send invoice summary
+      console.log("Order parsed successfully:", invoiceData);
       const reply = buildConfirmationMessage(invoiceData);
       await sendWhatsAppMessage(from, reply, to);
     }
@@ -205,7 +207,7 @@ async function sendWhatsAppMessage(to, text, phoneNumberId) {
   if (!response.ok) {
     console.error("WhatsApp send failed:", JSON.stringify(result));
   } else {
-    console.log(`Reply sent to ${to}`);
+    console.log(`Reply sent to ${to}, message ID: ${result.messages?.[0]?.id}`);
   }
 }
 
