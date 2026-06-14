@@ -54,7 +54,8 @@ app.post("/order", async (req, res) => {
     const to          = changes?.metadata?.phone_number_id; // which of YOUR numbers received it
 
     console.log(`Message from ${from}: ${messageText}`);
-
+    console.log("Message type:", message.type);
+    
     // ── STEP 3: SEND TO CLAUDE ──────────────────────────────────────────────
     const invoiceData = await parseOrderWithClaude(messageText, from);
 
