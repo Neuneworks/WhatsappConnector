@@ -57,7 +57,7 @@ app.post("/order", async (req, res) => {
     console.log("Message type:", message.type);
 
     // ── STEP 3: SEND TO CLAUDE ──────────────────────────────────────────────
-    const invoiceData = await parseOrderWithClaude(messageText, from);
+    const invoiceData = await parseOrderWithClaude(message, from);
 
     // ── STEP 4: REPLY ON WHATSAPP ───────────────────────────────────────────
     if (invoiceData.error) {
