@@ -55,7 +55,7 @@ app.post("/order", async (req, res) => {
 
     console.log(`Message from ${from}: ${messageText}`);
     console.log("Message type:", message.type);
-    
+
     // ── STEP 3: SEND TO CLAUDE ──────────────────────────────────────────────
     const invoiceData = await parseOrderWithClaude(messageText, from);
 
@@ -86,7 +86,7 @@ export async function parseOrderWithClaude(message, senderPhone) {
 
   try {
     let parsed;
-
+    console.log(`Parsing message of type "${msgType}" from ${senderPhone}`);
     if (msgType === "text") {
       // ── Text message ──────────────────────────────────────────────────────
       parsed = await parseTextOrder(message.text.body, senderPhone);
