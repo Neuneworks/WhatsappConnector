@@ -145,7 +145,9 @@ async function parseTextOrder(messageText, senderPhone) {
     }),
   });
 
-  return extractParsedOrder(await response.json());
+  var responseJson = await response.json();
+  console.log("Claude response:", JSON.stringify(responseJson));
+  return extractParsedOrder(responseJson);
 }
 
 
