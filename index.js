@@ -40,7 +40,7 @@ app.get("/sync", (req, res) => {
 
 // ─── STEP 2: RECEIVE INCOMING MESSAGES ───────────────────────────────────────
 // Meta POSTs here every time someone sends a message to your WA number.
-app.post("/order", async (req, res) => {
+app.post("/sync", async (req, res) => {
 
   // Always reply 200 immediately — Meta will retry if you don't respond fast
   res.sendStatus(200);
