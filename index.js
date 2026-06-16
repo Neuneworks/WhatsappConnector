@@ -12,6 +12,9 @@ const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;  // Your WA phone number ID
 const VERIFY_TOKEN    = process.env.VERIFY_TOKEN;     // Any secret string you choose
 const ANTHROPIC_KEY   = process.env.ANTHROPIC_KEY;    // Your Claude API key
 
+// Claude model name can be overridden via environment variable `CLAUDE_MODEL`.
+// Default kept as the previous model string for backward compatibility.
+const CLAUDE_MODEL = process.env.CLAUDE_MODEL;
 const GOOGLE_SHEET_ID  = process.env.GOOGLE_SHEET_ID;   // from Google Sheets URL
 const GOOGLE_CLIENT_EMAIL = process.env.GOOGLE_CLIENT_EMAIL; // from service account JSON
 const GOOGLE_PRIVATE_KEY  = process.env.GOOGLE_PRIVATE_KEY;  // from service account JSON
@@ -139,7 +142,7 @@ async function parseTextOrder(messageText, senderPhone) {
       "anthropic-version": "2023-06-01",
     },
     body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
+      model: CLAUDE_MODEL,
       max_tokens: 1000,
       messages: [{ role: "user", content: prompt }],
     }),
@@ -164,7 +167,7 @@ async function parseImageOrder(imageBase64, mimeType, senderPhone) {
       "anthropic-version": "2023-06-01",
     },
     body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
+      model: CLAUDE_MODEL,
       max_tokens: 1000,
       messages: [{
         role: "user",
